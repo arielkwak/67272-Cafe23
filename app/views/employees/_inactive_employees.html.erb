@@ -1,0 +1,15 @@
+  <h4>Inactive Employees at Cafe23</h4>
+  <table class="striped highlight">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inactive_employees.each do |employee| %>
+        <tr>
+          <td><%= link_to("#{employee.last_name}, #{employee.first_name}", employee_path(employee)) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 

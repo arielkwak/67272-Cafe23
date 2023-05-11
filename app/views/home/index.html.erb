@@ -1,0 +1,86 @@
+<% if logged_in? && current_user.employee_role? %>
+  <% unless current_user.nil? && current_user.current_assignment.nil? %>
+    <h4>Upcoming Shifts</h4>
+    <table class="striped highlight">
+      <thead>
+        <tr>
+          <th>Store</th>
+          <th>Assignment</th>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Start Or End</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @upcoming_shifts.each do |shift| %>
+          <tr>
+            <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
+            <td><%= link_to shift.assignment.pay_grade.level, assignment_path(shift.assignment) %></td>
+            <td><%= shift.date.strftime('%A, %B %d, %Y') %></td>
+            <td><%= shift.start_time.strftime('%I:%M %p') %></td>
+            <td><% unless shift.end_time.nil? %>
+              <%= shift.end_time.strftime('%I:%M %p') %>
+              <% end %>
+            </td>
+            <td>
+              <% if shift.date == Date.current && shift.status == "pending" %>
+                <%= button_to "Start Shift", time_in_path, method: :patch  %>
+              <% elsif shift.date == Date.current && shift.status == "started" %>
+                <%= button_to "End Shift", time_out_path, method: :patch %>
+              <% else %>
+                <%# do nothing %>
+              <% end %>
+            </td>
+          </tr> 
+        <% end %>
+      </tbody>
+    </table>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <% end %>
+<% else %>
+  <% if logged_in? %>
+    <% if current_user.admin_role? %>
+      <br/>
+      <h4>Get Payroll Employee</h4>
+      <button><%= link_to "Calculate Employee Payroll", employee_form_path %></button>
+      <br/><br/><br/><br/>
+    <% end %>
+    
+    <h4>Get Store Payroll</h4>
+    <button><%= link_to "Calculate Store Payroll", store_form_path %></button>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <% else %>
+    <br/><br/>
+    <h1 class="welcome">Welcome to Cafe23!</h1>
+    <h5 class="welcome">To continue please log in</h5>
+    <br/><br/><br/><br/>
+    <h5>Current Cafe23 Stores</h5>
+    <table class="striped highlight">
+    <thead>
+      <tr>
+        <th>Name</th> 
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_stores.each do |store| %>
+        <tr>
+          <td><%= store.name %></td>
+          <td><%= store.street %></td>
+          <td><%= store.city %></td>
+          <td><%= store.state %></td>
+          <td><%= store.zip %></td>
+          <td><%= store.phone %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <% end %>
+  
+<% end %>

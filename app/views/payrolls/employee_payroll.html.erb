@@ -1,0 +1,12 @@
+<h1>Employee Payroll Report</h1>
+
+<p>Period: <%= @calculator.date_range.start_date.strftime("%m/%d/%Y") %> - <%= @calculator.date_range.end_date.strftime("%m/%d/%Y") %></p>
+
+<p><%= @employee.first_name %> <%= @employee.last_name %></p>
+
+<p>SSN: <%= @employee.ssn %></p>
+<p>Current Pay Grade: <%= @employee_payroll.pay_grade %></p>
+<p>Current Rate: <%= @employee_payroll.pay_rate %> per hour</p>
+<p>Hours Worked: <%=@employee_payroll.hours %> hours</p>
+<p>Earnings: <%= @employee_payroll.pay_earned %></p>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

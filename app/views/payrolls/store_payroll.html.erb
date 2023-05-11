@@ -1,0 +1,28 @@
+<h1>Store Payroll Report</h1>
+
+<h5>Period: <%= @calculator.date_range.start_date.strftime("%m/%d/%Y") %> - <%= @calculator.date_range.end_date.strftime("%m/%d/%Y") %></h5>
+
+<h5>Store: <%= @store.name %></h5>
+
+<table class="striped highlight">
+  <thead>
+    <th>Name</th>
+    <th>SSN</th>
+    <th>Current Pay Grade</th>
+    <th>Current Rate</th>
+    <th>Hours Worked</th>
+    <th>Earnings</th>
+ 
+  </thead>
+  <% for payrolls in @store_payroll %>
+    <tr>
+      <td><%= payrolls.employee.name %></td>
+      <td><%= payrolls.employee.ssn %></td>
+      <td><%= payrolls.pay_grade %></td>
+      <td><%= payrolls.pay_rate %></td>
+      <td><%= payrolls.hours %></td>
+      <td><%= payrolls.pay_earned %></td>
+    </tr>
+  <% end %>
+</table>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

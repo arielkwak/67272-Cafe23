@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Shift Information for <%= @shift.employee.name %></h5><br />
+
+    <b>Date:&nbsp;&nbsp;</b>
+      <%= @shift.date %><br /><br />
+
+    <b>Time Period:&nbsp;&nbsp;</b>
+      <p><%= @shift.start_time.strftime('%I:%M %p') %> - <%= @shift.end_time.strftime('%I:%M %p') %></p> <br /><br />
+    
+    <b>Notes:&nbsp;&nbsp;</b>
+      <%= @shift.notes %><br /><br />
+      
+    <b>Status:&nbsp;&nbsp;</b>
+      <%= @shift.status %><br /><br />
+    </div>
+</div>
+
+ 
